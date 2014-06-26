@@ -22,8 +22,19 @@ function path(t, startx, starty, endx, endy)
 	flood(_t, startx, starty, 1)
 end
 
-function flood(t, x, y, n)
-	if t[y][x] ~= -1 then
+local function flood(t, x, y, n)
+	if not t[y] then return end
+	if not t[y][x] then return end
+
+	if t[y][x] < n then
 		t[y][x] = n
 	end
+	flood(t, x + 1, y, n + 1) --right
+	flood(t, x, y + 1, n + 1) --down
+	flood(t, x + 1, y - 1, n + 1) --upper right
+	flood(t, x, y - 1, n + 1) --up
+	flood(t, x - 1, y, n + 1) --left
+	flood(t, x - 1, y - 1, n + 1) --upper left
+	flood(t, x - 1, y + 1, n + 1) --bottom left
+	flood(t, x + 1, y + 1, n + 1) --bottom right
 end
