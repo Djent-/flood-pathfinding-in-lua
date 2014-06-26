@@ -19,7 +19,7 @@ function path(t, startx, starty, endx, endy)
 			end
 		end
 	end
-	_t = flood(_t, startx, starty, 1)
+	flood(_t, startx, starty, 1)
 end
 
 function flood(t, x, y, n)
