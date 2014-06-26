@@ -13,9 +13,9 @@ function path(t, startx, starty, endx, endy)
 		_t[_y] = {}
 		for _x = 1, x do
 			if t[y][x] == 0 then
-				_t[_y][_x] = 0 --passable
+				_t[_y][_x] = x * y --passable
 			else
-				_t[_y][_x] = x * y + 1 --impassable
+				_t[_y][_x] = 0 --impassable
 			end
 		end
 	end
@@ -26,8 +26,10 @@ local function flood(t, x, y, n)
 	if not t[y] then return end
 	if not t[y][x] then return end
 
-	if t[y][x] < n then
+	if t[y][x] > n then
 		t[y][x] = n
+	else
+		return
 	end
 	flood(t, x + 1, y, n + 1) --right
 	flood(t, x, y + 1, n + 1) --down
