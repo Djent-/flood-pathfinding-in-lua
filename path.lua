@@ -13,16 +13,17 @@ function path(t, startx, starty, endx, endy)
 		_t[_y] = {}
 		for _x = 1, x do
 			if t[y][x] == 0 then
-				_t[_y][_x] = 0
+				_t[_y][_x] = 0 --passable
 			else
-				_t[_y][_x] = x * y + 1
+				_t[_y][_x] = x * y + 1 --impassable
 			end
 		end
 	end
-	_t[endy][endx] = x * y
-	flood(_t, startx, starty)
+	_t = flood(_t, startx, starty, 1)
 end
 
-function flood(t, x, y)
-
+function flood(t, x, y, n)
+	if t[y][x] ~= -1 then
+		t[y][x] = n
+	end
 end
