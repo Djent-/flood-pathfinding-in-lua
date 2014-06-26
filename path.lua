@@ -1,5 +1,7 @@
 --path.lua
 --2014.6.26
+--pass a multidimensional table
+--0 for passable, 1 for impassable
 
 function path(t, startx, starty, endx, endy)
 	if type(t) ~= "table" then error("Provide a table.")
