@@ -15,13 +15,15 @@ function path(t, startx, starty, endx, endy)
 			if t[_y][_x] == 0 then
 				_t[_y][_x] = x * y --passable
 			else
-				_t[_y][_x] = 0 --impassable
+				_t[_y][_x] = nil --impassable
 			end
 		end
 	end
 	flood(_t, startx, starty, 1)
-	local path_points = {}
+	testprinttable(_t)
+	local path_points = {{endx, endy}}
 	path_back(_t, endx, endy, path_points)
+	testprinttable_1(path_points)
 end
 
 function flood(t, x, y, n)
@@ -44,12 +46,23 @@ function flood(t, x, y, n)
 end
 
 function path_back(t, x, y, points)
+	local temp_points = {}
 	for a = -1, 1 do
 		for b = -1, 1 do
 			if not t[y + a] then break end
-
+			if t[y + a][x + b] then
+				if t[y + a][x + b] < t[y][x] then
+					--it's a prospective path tile
+					table.insert(temp_points, {x + b, y + a})
+				end
+			end
 		end
 	end
+	if #temp_points == 0 then return end
+	local path_tile = math.random(#temp_points)
+	local xn, yn = temp_points[path_tile][1], temp_points[path_tile][2]
+	table.insert(points, 1, {xn, yn})
+	path_back(t, xn, yn, points)
 end
 
 function testprinttable(t)
@@ -61,8 +74,25 @@ function testprinttable(t)
 	for y = 1, #t do
 		output = ""
 		for x = 1, #t[y] do
-			output = output .. t[y][x]
+			if t[y][x] then
+				output = output .. t[y][x]
+			else
+				output = output .. 0
+			end
 		end
+		print(output)
+	end
+end
+
+function testprinttable_1(t)
+	if not t then return end
+	if not t[1] then return end
+	if not t[1][1] then return end
+
+	local output
+	for y = 1, #t do
+		output = ""
+		output = output .. " {" .. t[y][1] .. ", " .. t[y][2] .. "}"
 		print(output)
 	end
 end
