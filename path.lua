@@ -44,7 +44,12 @@ function flood(t, x, y, n)
 end
 
 function path_back(t, x, y, points)
+	for a = -1, 1 do
+		for b = -1, 1 do
+			if not t[y + a] then break end
 
+		end
+	end
 end
 
 function testprinttable(t)
