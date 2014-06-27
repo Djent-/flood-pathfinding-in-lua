@@ -20,7 +20,8 @@ function path(t, startx, starty, endx, endy)
 		end
 	end
 	flood(_t, startx, starty, 1)
-	testprinttable(_t)
+	local path_points = {}
+	path_back(_t, endx, endy, path_points)
 end
 
 function flood(t, x, y, n)
@@ -40,6 +41,10 @@ function flood(t, x, y, n)
 	flood(t, x - 1, y - 1, n + 1) --upper left
 	flood(t, x - 1, y + 1, n + 1) --bottom left
 	flood(t, x + 1, y + 1, n + 1) --bottom right
+end
+
+function path_back(t, x, y, points)
+
 end
 
 function testprinttable(t)
