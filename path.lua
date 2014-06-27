@@ -20,10 +20,8 @@ function path(t, startx, starty, endx, endy)
 		end
 	end
 	flood(_t, startx, starty, 1)
-	testprinttable(_t)
 	local path_points = {{endx, endy}}
 	path_back(_t, endx, endy, path_points)
-	testprinttable_1(path_points)
 end
 
 function flood(t, x, y, n)
@@ -64,45 +62,3 @@ function path_back(t, x, y, points)
 	table.insert(points, 1, {xn, yn})
 	path_back(t, xn, yn, points)
 end
-
-function testprinttable(t)
-	if not t then return end
-	if not t[1] then return end
-	if not t[1][1] then return end
-
-	local output
-	for y = 1, #t do
-		output = ""
-		for x = 1, #t[y] do
-			if t[y][x] then
-				output = output .. t[y][x]
-			else
-				output = output .. 0
-			end
-		end
-		print(output)
-	end
-end
-
-function testprinttable_1(t)
-	if not t then return end
-	if not t[1] then return end
-	if not t[1][1] then return end
-
-	local output
-	for y = 1, #t do
-		output = ""
-		output = output .. " {" .. t[y][1] .. ", " .. t[y][2] .. "}"
-		print(output)
-	end
-end
-
-a = {
-{0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0},
-{0,0,0,0,1,0,0,0,0},
-{0,0,0,0,1,0,0,0,0},
-{0,0,0,0,1,0,0,0,0}
-}
-
-path(a, 1, 5, 8, 5)
