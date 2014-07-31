@@ -4,7 +4,7 @@
 --0 for passable, 1 for impassable
 
 function path(t, startx, starty, endx, endy)
-	if type(t) ~= "table" then error("Provide a table.") end
+	if type(t) ~= "table" then error("Provide a table. " .. type(t)) end
 	if type(t[1]) ~= "table" then error("Provide a table of tables.") end
 
 	local y, x = #t, #t[1]
@@ -22,6 +22,7 @@ function path(t, startx, starty, endx, endy)
 	flood(_t, startx, starty, 1)
 	local path_points = {{endx, endy}}
 	path_back(_t, endx, endy, path_points)
+	return path_points
 end
 
 function flood(t, x, y, n)
